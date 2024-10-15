@@ -14,7 +14,7 @@ const BooksProvider = ({ children }) => {
       try {
         const response = await axios.get("https://gutendex.com/books");
         // console.log(response);
-        setBooks(response.data.results); // Adjust according to the structure of the response
+        setBooks(response.data.results);
         setLoading(false);
       } catch (err) {
         setError(err);

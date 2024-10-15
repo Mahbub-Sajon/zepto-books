@@ -49,9 +49,15 @@ const SharedBooks = ({ title, author, image, genre, id }) => {
         onClick={toggleWishlist}
       >
         {isWishlisted ? (
-          <AiFillHeart size={24} />
+          <>
+            <AiFillHeart size={24} />
+            <span>Added to your wishlist</span>
+          </>
         ) : (
-          <AiOutlineHeart size={24} />
+          <>
+            <AiOutlineHeart size={24} />
+            <span>Add to your wishlist</span>
+          </>
         )}
       </div>
     </div>
