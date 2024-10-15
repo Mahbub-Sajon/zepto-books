@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { BooksContext } from "../../providers/BooksProvider";
 import SharedBooks from "../../shared/SharedBooks/SharedBooks";
 import Loading from "../../shared/Loading/Loading";
@@ -7,21 +7,28 @@ const Books = () => {
   const { books, loading, error } = useContext(BooksContext);
   const [currentPage, setCurrentPage] = useState(1);
   const booksPerPage = 6;
+  const [wishlist, setWishlist] = useState([]);
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
-
   const totalPages = Math.ceil(books.length / booksPerPage);
 
-  // pagination handling from here
+  useEffect(() => {
+    const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    setWishlist(savedWishlist);
+  }, []);
+
+  const updateWishlist = (updatedWishlist) => {
+    setWishlist(updatedWishlist);
+  };
+
   const handlePageChange = (pageNumber) => {
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
     }
   };
 
-  // buttons for pagination
   const renderPaginationButtons = () => {
     let buttons = [];
 
@@ -101,12 +108,18 @@ const Books = () => {
     return buttons;
   };
 
-  if (loading) return <Loading></Loading>;
-  if (error) return <div>Error fetching books: {error.message}</div>;
+  if (loading) return <Loading />;
+  if (error)
+    return (
+      <div>
+        We are trying to show you our books. Please refresh to see our
+        collections. {error.message}
+      </div>
+    );
 
   return (
     <div>
-      {/* My Books Dta */}
+      {/* My Books Data */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {currentBooks.map((book) => (
           <SharedBooks
@@ -116,6 +129,7 @@ const Books = () => {
             image={book.formats["image/jpeg"]}
             genre={book.subjects[0] || "Unknown Genre"}
             id={book.id}
+            onToggleWishlist={updateWishlist}
           />
         ))}
       </div>
@@ -123,7 +137,7 @@ const Books = () => {
       <div className="flex justify-center items-center mt-4 space-x-2">
         {renderPaginationButtons()}
 
-        {/* the side dropdown */}
+        {/* Page Selector */}
         <div className="ml-4">
           <label htmlFor="page-selector" className="mr-2 text-gray-700">
             Go to page:

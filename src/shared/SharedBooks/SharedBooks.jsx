@@ -1,10 +1,10 @@
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useState, useEffect } from "react";
 
-const SharedBooks = ({ title, author, image, genre, id }) => {
+const SharedBooks = ({ title, author, image, genre, id, onToggleWishlist }) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
 
-  // checking the local storage if it's already added
+  // Checking the local storage if it's already added
   useEffect(() => {
     const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
     const isBookInWishlist = wishlist.some((book) => book.id === id);
@@ -17,14 +17,15 @@ const SharedBooks = ({ title, author, image, genre, id }) => {
     if (isWishlisted) {
       const updatedWishlist = wishlist.filter((book) => book.id !== id);
       localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+      onToggleWishlist(updatedWishlist);
     } else {
-      // adding to my list
       const newBook = { title, author, image, genre, id };
       wishlist.push(newBook);
       localStorage.setItem("wishlist", JSON.stringify(wishlist));
+      onToggleWishlist(wishlist);
     }
 
-    // aetting my list
+    // Setting my list
     setIsWishlisted(!isWishlisted);
   };
 
