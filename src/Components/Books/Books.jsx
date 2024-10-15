@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { BooksContext } from "../../providers/BooksProvider";
 import SharedBooks from "../../shared/SharedBooks/SharedBooks";
+import Loading from "../../shared/Loading/Loading";
 
 const Books = () => {
   const { books, loading, error } = useContext(BooksContext);
@@ -100,7 +101,7 @@ const Books = () => {
     return buttons;
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading></Loading>;
   if (error) return <div>Error fetching books: {error.message}</div>;
 
   return (
