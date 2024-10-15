@@ -1,7 +1,7 @@
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useState, useEffect } from "react";
 
-const Books = ({ title, author, image, genre, id }) => {
+const SharedBooks = ({ title, author, image, genre, id }) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
 
   // checking the local storage if it's already added
@@ -43,7 +43,7 @@ const Books = ({ title, author, image, genre, id }) => {
       </div>
 
       <div
-        className={`absolute top-3 right-3 cursor-pointer transition-colors duration-300 ease-in-out ${
+        className={`absolute cursor-pointer bottom-3 right-3 flex transition-colors duration-300 ease-in-out ${
           isWishlisted ? "text-red-500" : "text-gray-400"
         }`}
         onClick={toggleWishlist}
@@ -58,4 +58,4 @@ const Books = ({ title, author, image, genre, id }) => {
   );
 };
 
-export default Books;
+export default SharedBooks;
