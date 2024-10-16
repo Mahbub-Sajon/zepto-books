@@ -8,11 +8,19 @@ const Books = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const booksPerPage = 6;
   const [wishlist, setWishlist] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
-  const totalPages = Math.ceil(books.length / booksPerPage);
+
+  // filtering from here
+  const filteredBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // for pagination
+  const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
+  const totalPages = Math.ceil(filteredBooks.length / booksPerPage);
 
   useEffect(() => {
     const savedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
@@ -119,25 +127,42 @@ const Books = () => {
 
   return (
     <div>
-      {/* My Books Data */}
+      <div className="p-4 flex justify-center items-center">
+        <input
+          type="text"
+          placeholder="Search books..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="border border-slate-700 px-3 py-2 rounded-md w-full md:w-1/3"
+        />
+        <button className="ml-2 bg-blue-500 text-white px-3 py-2 rounded-md">
+          Search
+        </button>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-        {currentBooks.map((book) => (
-          <SharedBooks
-            key={book.id}
-            title={book.title}
-            author={book.authors[0]?.name}
-            image={book.formats["image/jpeg"]}
-            genre={book.subjects[0] || "Unknown Genre"}
-            id={book.id}
-            onToggleWishlist={updateWishlist}
-          />
-        ))}
+        {currentBooks.length > 0 ? (
+          currentBooks.map((book) => (
+            <SharedBooks
+              key={book.id}
+              title={book.title}
+              author={book.authors[0]?.name}
+              image={book.formats["image/jpeg"]}
+              genre={book.subjects[0] || "Unknown Genre"}
+              id={book.id}
+              onToggleWishlist={updateWishlist}
+            />
+          ))
+        ) : (
+          <div className="col-span-full text-center text-red-500">
+            Sorry, the book you are looking for is not available.
+          </div>
+        )}
       </div>
 
       <div className="flex justify-center items-center mt-4 space-x-2">
         {renderPaginationButtons()}
 
-        {/* Page Selector */}
         <div className="ml-4">
           <label htmlFor="page-selector" className="mr-2 text-gray-700">
             Go to page:
