@@ -3,7 +3,7 @@ const Loading = () => {
     <div className="flex justify-center items-center min-h-screen">
       <button
         type="button"
-        className="bg-[#36d7b7] text-white font-bold py-2 px-4 rounded inline-flex align-middle items-center"
+        className="bg-[#6592e0] text-white font-bold py-2 px-4 rounded inline-flex align-middle items-center"
         disabled
       >
         <svg
