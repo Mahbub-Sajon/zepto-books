@@ -4,9 +4,11 @@ import Footer from "./shared/Footer/Footer";
 
 function App() {
   return (
-    <div className="bg-[#d9e1d5]">
+    <div className="flex flex-col min-h-screen bg-[#d9e1d5]">
       <Navbar />
-      <Outlet />
+      <main className="flex-grow">
+        <Outlet />
+      </main>
       <Footer />
     </div>
   );

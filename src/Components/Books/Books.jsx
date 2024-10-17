@@ -9,16 +9,16 @@ const Books = () => {
   const booksPerPage = 6;
   const [wishlist, setWishlist] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedGenre, setSelectedGenre] = useState(""); // New state for selected genre
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
 
   const genres = [
     ...new Set(books.map((book) => book.subjects[0] || "Unknown Genre")),
-  ]; // Extract unique genres
+  ];
 
-  // Filter books based on search query and selected genre
+  //filtering genre
   const filteredBooks = books.filter((book) => {
     const matchesSearch = book.title
       .toLowerCase()
@@ -57,7 +57,7 @@ const Books = () => {
             key={i}
             className={`px-3 py-1 border rounded-md ${
               currentPage === i
-                ? "bg-blue-500 text-white"
+                ? "bg-slate-600 text-white"
                 : "bg-gray-200 text-gray-700"
             }`}
             onClick={() => handlePageChange(i)}
@@ -72,7 +72,7 @@ const Books = () => {
           key={1}
           className={`px-3 py-1 border rounded-md ${
             currentPage === 1
-              ? "bg-blue-500 text-white"
+              ? "bg-slate-600 text-white"
               : "bg-gray-200 text-gray-700"
           }`}
           onClick={() => handlePageChange(1)}
@@ -94,7 +94,7 @@ const Books = () => {
             key={i}
             className={`px-3 py-1 border rounded-md ${
               currentPage === i
-                ? "bg-blue-500 text-white"
+                ? "bg-slate-600 text-white"
                 : "bg-gray-200 text-gray-700"
             }`}
             onClick={() => handlePageChange(i)}
@@ -113,7 +113,7 @@ const Books = () => {
           key={totalPages}
           className={`px-3 py-1 border rounded-md ${
             currentPage === totalPages
-              ? "bg-blue-500 text-white"
+              ? "bg-slate-600 text-white"
               : "bg-gray-200 text-gray-700"
           }`}
           onClick={() => handlePageChange(totalPages)}
@@ -197,7 +197,7 @@ const Books = () => {
             id="page-selector"
             value={currentPage}
             onChange={(e) => handlePageChange(Number(e.target.value))}
-            className="border px-2 py-1 rounded-md"
+            className="border px-2 py-1 rounded-md focus:ring-1 focus:ring-slate-700 "
           >
             {Array.from({ length: totalPages }, (_, index) => (
               <option key={index + 1} value={index + 1}>
