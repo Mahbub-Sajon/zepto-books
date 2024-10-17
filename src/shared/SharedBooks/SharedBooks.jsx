@@ -46,7 +46,7 @@ const SharedBooks = ({ title, author, image, genre, id, onToggleWishlist }) => {
       <div className="mt-4">
         <div
           className={`absolute cursor-pointer bottom-3 right-3 flex transition-colors duration-300 ease-in-out ${
-            isWishlisted ? "text-red-700" : "text-black"
+            isWishlisted ? "text-pink-600" : "text-black"
           }`}
           onClick={toggleWishlist}
         >
