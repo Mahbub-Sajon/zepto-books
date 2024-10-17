@@ -18,11 +18,13 @@ const Navbar = () => {
     <header className="sticky bg-white top-0 p-3 z-10 shadow-md">
       <nav className="mx-auto px-5 max-w-[1220px] flex justify-between items-center">
         <div className="flex justify-center align-middle items-center">
-          <img
-            className="hidden md:block w-[3rem] rounded-md"
-            src={logo}
-            alt=""
-          />
+          <NavLink to="/">
+            <img
+              className="hidden md:block w-[3rem] rounded-md"
+              src={logo}
+              alt=""
+            />
+          </NavLink>
           <h2 className="font-bold text-xl ml-5 hidden md:block">
             <span className="text-[#0271bb]">Zepto</span>{" "}
             <span className="text-[#f6921f]">Books</span>
