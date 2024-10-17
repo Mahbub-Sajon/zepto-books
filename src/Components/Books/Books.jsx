@@ -9,13 +9,25 @@ const Books = () => {
   const booksPerPage = 6;
   const [wishlist, setWishlist] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState(""); // New state for selected genre
 
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
 
-  const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const genres = [
+    ...new Set(books.map((book) => book.subjects[0] || "Unknown Genre")),
+  ]; // Extract unique genres
+
+  // Filter books based on search query and selected genre
+  const filteredBooks = books.filter((book) => {
+    const matchesSearch = book.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesGenre = selectedGenre
+      ? book.subjects[0] === selectedGenre
+      : true;
+    return matchesSearch && matchesGenre;
+  });
 
   const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
   const totalPages = Math.ceil(filteredBooks.length / booksPerPage);
@@ -125,7 +137,11 @@ const Books = () => {
 
   return (
     <div>
-      <div className="p-4 flex justify-center items-center">
+      <h1 className="text-3xl font-bold text-center mt-5">
+        Search your desired books
+      </h1>
+      <div className="p-4 flex justify-center items-center space-x-4 mb-8">
+        {/* Search Bar */}
         <input
           type="text"
           placeholder="Search books..."
@@ -133,11 +149,23 @@ const Books = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           className="border border-slate-700 px-3 py-2 rounded-md w-full md:w-1/3"
         />
-        <button className="ml-2 bg-blue-500 text-white px-3 py-2 rounded-md">
-          Search
-        </button>
+
+        {/* Genre Dropdown */}
+        <select
+          value={selectedGenre}
+          onChange={(e) => setSelectedGenre(e.target.value)}
+          className="border border-slate-700 px-3 py-2 rounded-md"
+        >
+          <option value="">All Genres</option>
+          {genres.map((genre, index) => (
+            <option key={index} value={genre}>
+              {genre}
+            </option>
+          ))}
+        </select>
       </div>
 
+      <h1 className="text-3xl font-bold text-center">See the collections</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center p-5 mx-10">
         {currentBooks.length > 0 ? (
           currentBooks.map((book) => (

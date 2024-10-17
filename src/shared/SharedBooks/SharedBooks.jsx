@@ -30,7 +30,7 @@ const SharedBooks = ({ title, author, image, genre, id, onToggleWishlist }) => {
   };
 
   return (
-    <div className="w-full shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ease-in-out relative">
+    <div className="w-full shadow-lg rounded-lg overflow-hidden relative hover:-translate-y-1 hover:shadow-2xl transition duration-300 ease-in-out transform  hover:scale-110 delay-150">
       <img
         className="w-full h-48 object-cover"
         src={image}
