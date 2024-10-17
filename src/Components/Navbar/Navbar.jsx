@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="sticky bg-white top-0 p-3 z-10 shadow-md">
+    <header className="sticky bg-gradient-to-r from-[#5e817a] to-[#acb9b4] top-0 p-3 z-10 shadow-md">
       <nav className="mx-auto px-5 max-w-[1220px] flex justify-between items-center">
         <div className="flex justify-center align-middle items-center">
           <NavLink to="/">
