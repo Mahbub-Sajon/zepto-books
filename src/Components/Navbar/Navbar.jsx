@@ -3,10 +3,8 @@ import logo from "../../assets/Zepto.png";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 const Navbar = () => {
-  // State for mobile menu toggle
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  //Function for toggle menu icon for mobile
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
   };

@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "../Pages/Home/Home";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import AboutUs from "../Pages/AboutUs/AboutUs";
+import ViewDetails from "../Pages/ViewDetails/ViewDetails";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
+      },
+      {
+        path: "/books/:id",
+        element: <ViewDetails />,
       },
     ],
   },

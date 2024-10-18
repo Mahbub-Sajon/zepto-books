@@ -22,7 +22,7 @@ const Wishlist = () => {
 
   if (wishlist.length === 0) {
     return (
-      <div className="text-center font-bold text-3xl mt-5  text-red-700">
+      <div className="text-center font-bold text-3xl mt-5 text-red-700">
         Your wishlist is empty!
       </div>
     );
@@ -31,7 +31,7 @@ const Wishlist = () => {
   return (
     <div>
       <h1 className="text-center font-bold text-3xl mt-5 mb-2">
-        This is your Wishlist
+        This is your wishlist
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 justify-items-center p-5 mx-10">
         {wishlist.map((book) => (
