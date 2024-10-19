@@ -68,7 +68,7 @@ const SharedBooks = ({ title, author, image, genre, id, onToggleWishlist }) => {
           )}
         </div>
 
-        <button className="bg-gray-400 w-full px-3 py-2 rounded text-center">
+        <button className="bg-gray-400 hover:bg-gray-300 w-full px-3 py-2 rounded text-center">
           <Link to={`/books/${id}`}>View Details</Link>
         </button>
       </div>

@@ -63,7 +63,7 @@ const Books = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-center mt-5">
+      <h1 className="text-3xl font-bold text-center mt-5 mx-2">
         Search your desired books
       </h1>
       <div className="p-4 flex justify-center items-center space-x-4 mb-8">
