@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 const useWishlist = () => {
   const [wishlist, setWishlist] = useState(() => {
-    // Initialize state from localStorage
     return JSON.parse(localStorage.getItem("wishlist")) || [];
   });
 
@@ -12,9 +11,8 @@ const useWishlist = () => {
 
   const addToWishlist = (book) => {
     setWishlist((prevWishlist) => {
-      // Check if the book is already in the wishlist
       if (prevWishlist.some((item) => item.id === book.id)) {
-        return prevWishlist; // Don't add duplicates
+        return prevWishlist;
       }
       const newWishlist = [...prevWishlist, book];
       updateLocalStorage(newWishlist);
